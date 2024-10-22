@@ -17,7 +17,7 @@ class FamilyController extends Controller
     function table():View{
         return view("families.table",[
             "title"=>"Karakterek",
-            "families"=>$this->loadCharacters()
+            "characters"=>$this->loadCharacters()
         ]);
     }
     function loadFamilies(){
