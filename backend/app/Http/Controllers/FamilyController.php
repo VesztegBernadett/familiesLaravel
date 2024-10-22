@@ -27,9 +27,7 @@ class FamilyController extends Controller
         }
         return $families;
     }
-    function show(Request $request) : View {
-        $slug = $request->query("slug");
-        $id = $request->query("id");
+    function show($slug,$id) : View {
         $character = $this->loadCharacters()[$slug][$id];
         return view("families.show",[
             "title"=>"Karakter",
@@ -37,10 +35,13 @@ class FamilyController extends Controller
             "slug"=>$slug
         ]);
     }
-    function list(Request $request):View{
-        $slug = $request->query("slug");
+    function list($slug):View{
         $characters = $this->loadCharacters()[$slug];
-        return view("families");
+        return view("families.list",[
+            "title"=>$this->loadFamilies()[$slug],
+            "slug"=>$slug,
+            "family"=>$characters
+        ]);
     }
     function loadCharacters():Collection{
         return collect(
